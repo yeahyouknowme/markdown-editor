@@ -1,6 +1,53 @@
-body {
+$red: #A80852;
+$blue: #103C9C;
+$medium-purple: #7A109C;
+$purple: #30158F;
+$dark-purple: #1A0C4F;
+$darker-purple: #1E1836;
+$medium-gray: #333347;
+$dark-gray: #242533;
+$darker-gray: #12121A;
+
+@keyframes editor-slide-up {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -100vh;
+  }
+}
+
+@keyframes editor-slide-down {
+  0% {
+    top: -100vh;
+  }
+  100% {
+    top: 0
+  }
+}
+
+@keyframes preview-slide-up {
+  0% {
+    top: 100vh;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes preview-slide-down {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 100vh;
+  }
+}
+
+html, body {
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .default-font {
@@ -27,30 +74,64 @@ body {
   display: none;
 }
 @media only screen and (max-width: 600px) {
+
   .app-body {
-    display: flex;
-    flex-direction: column;
     width: 100vw;
     height: 100vh;
   }
 
-  .toggle-preview{
+  .open-preview {
     position: absolute;
     bottom: 0%;
     left: 50%;
-    color: pink;
+    color: $medium-purple;
     transform: translate(-50%, 0%);
   }
+
+  .close-preview {
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    color: $red;
+    transform: translate(-50%, 0%);
+  }
+
   .editor-panel {
     height: 100vh;
     width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
     overflow-y: auto;
+    animation: editor-slide-down 0.5s ease-in-out;
+  }
+  .editor-panel-hidden {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    top: -100vh;
+    overflow-y: auto;
+    animation: editor-slide-up 0.5s ease-in-out;
   }
 
   .preview-panel {
     height: 100vh;
     width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
     overflow-y: auto;
+    animation: preview-slide-up 0.5s ease-in-out;
+  }
+  .preview-panel-hidden {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 100vh;
+    left: 0;
+    overflow-y: auto;
+    animation: preview-slide-down 0.5s ease-in-out;
   }
 
   #editor {

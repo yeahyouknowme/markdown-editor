@@ -4,7 +4,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import { markdown } from '@codemirror/lang-markdown';
 import { marked } from 'marked';
 import { Icon } from '@mdi/react'
-import { mdiChevronUpCircle } from '@mdi/js';
+import { mdiChevronUpCircle, mdiChevronDownCircle } from '@mdi/js';
 import './App.css';
 
 marked.setOptions({
@@ -44,7 +44,7 @@ const App = () =>{
 
   return (
     <div className="app-body">
-        <div className={ showPreview ? "hidden" : "editor-panel"}>
+        <div className={ showPreview ? "editor-panel-hidden" : "editor-panel"}>
           <CodeMirror
             value={defaultText}
             extensions={[markdown()]}
@@ -53,14 +53,14 @@ const App = () =>{
             id="editor"
           />
         </div>
-        <div className={ showPreview ? "preview-panel" : "hidden" }>
+        <div className={ showPreview ? "preview-panel" : "preview-panel-hidden" }>
             <div id="preview" dangerouslySetInnerHTML={{__html: cleanMarkup}} />
         </div>
         { screenSize > 600 
           ? null 
-          : <div className="toggle-preview">
+          : <div className={ showPreview ? "close-preview" : "open-preview" }>
               <Icon 
-                path={mdiChevronUpCircle}
+                path={ showPreview ? mdiChevronDownCircle : mdiChevronUpCircle}
                 size={2}
                 onClick={togglePreview}
               />
