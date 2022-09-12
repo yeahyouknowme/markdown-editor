@@ -50,29 +50,33 @@ const App = () =>{
 
   return (
     <div className="app-body">
-        <div className={ showPreview ? "editor-panel-hidden" : "editor-panel"}>
-          <CodeMirror
-            value={defaultText}
-            theme={CMTheme}
-            extensions={[vim(), markdown()]}
-            width="100%"
-            onChange={onChange}
-            id="editor"
-          />
+      <div className={ showPreview ? "editor-panel-hidden" : "editor-panel"}>
+        <div className="editor-header">
         </div>
-        <div className={ showPreview ? "preview-panel" : "preview-panel-hidden" }>
-            <div id="preview" dangerouslySetInnerHTML={{__html: cleanMarkup}} />
-        </div>
-        { screenSize > 600 
-          ? null 
-          : <div className={ showPreview ? "close-preview" : "open-preview" }>
-              <Icon 
-                path={ showPreview ? mdiChevronDownCircle : mdiChevronUpCircle}
-                size={2}
-                onClick={togglePreview}
-              />
-            </div>
-        }
+        <CodeMirror
+          value={defaultText}
+          theme={CMTheme}
+          extensions={[vim(), markdown()]}
+          width="100%"
+          onChange={onChange}
+          id="editor"
+        />
+      </div>
+      <div className={ showPreview ? "preview-panel" : "preview-panel-hidden" }>
+          <div className="preview-header">
+          </div>
+          <div id="preview" dangerouslySetInnerHTML={{__html: cleanMarkup}} />
+      </div>
+      { screenSize > 600 
+        ? null 
+        : <div className={ showPreview ? "close-preview" : "open-preview" }>
+            <Icon 
+              path={ showPreview ? mdiChevronDownCircle : mdiChevronUpCircle}
+              size={2}
+              onClick={togglePreview}
+            />
+          </div>
+      }
     </div>
   );
 }
