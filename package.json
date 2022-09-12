@@ -45,6 +45,9 @@
     ]
   },
   "devDependencies": {
-    "@replit/codemirror-vim": "^6.0.2"
+    "@lezer/highlight": "^1.0.0",
+    "@replit/codemirror-vim": "^6.0.2",
+    "@uiw/codemirror-themes": "^4.12.1",
+    "jotai": "^1.8.3"
   }
 }

@@ -6,7 +6,10 @@ import { vim } from '@replit/codemirror-vim';
 import { marked } from 'marked';
 import { Icon } from '@mdi/react'
 import { mdiChevronUpCircle, mdiChevronDownCircle } from '@mdi/js';
+import { useAtom } from 'jotai';
+
 import './App.css';
+import { CMThemeAtom } from './store';
 
 marked.setOptions({
   breaks: true
@@ -19,6 +22,8 @@ const App = () =>{
   const [cleanMarkup, setCleanMarkup] = useState(DOMPurify.sanitize(defaultHTML));
   const [screenSize, setScreenSize] = useState(0);
   const [showPreview, setShowPreview] = useState(false);
+
+  const [CMTheme, setCMTheme] = useAtom(CMThemeAtom);
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,6 +53,7 @@ const App = () =>{
         <div className={ showPreview ? "editor-panel-hidden" : "editor-panel"}>
           <CodeMirror
             value={defaultText}
+            theme={CMTheme}
             extensions={[vim(), markdown()]}
             width="100%"
             onChange={onChange}
