@@ -73,6 +73,9 @@ html, body {
     background-color: #12121A;
     border-bottom: 1px solid #6A6A94;
   }
+  .editor-header .hamburger-button {
+    padding: 0 0 0 0.2em;
+  }
   .open-preview {
     position: absolute;
     z-index: 2;
@@ -98,7 +101,7 @@ html, body {
     top: 0;
     left: 0;
     overflow-y: auto;
-    animation: editor-slide-down 0.5s ease-in-out;
+    animation: editor-slide-down 0.25s ease-in-out;
   }
   .editor-panel-hidden {
     height: 100vh;
@@ -107,16 +110,16 @@ html, body {
     left: 0;
     top: -100vh;
     overflow-y: auto;
-    animation: editor-slide-up 0.5s ease-in-out;
+    animation: editor-slide-up 0.25s ease-in-out;
   }
   .preview-panel {
-    height: 96.5vh;
+    height: 96vh;
     width: 100vw;
     position: absolute;
     top: 0;
     left: 0;
     overflow-y: auto;
-    animation: preview-slide-up 0.5s ease-in-out;
+    animation: preview-slide-up 0.25s ease-in-out;
   }
   .preview-panel-hidden {
     height: 96.5vh;
@@ -125,7 +128,7 @@ html, body {
     top: 100vh;
     left: 0;
     overflow-y: auto;
-    animation: preview-slide-down 0.5s ease-in-out;
+    animation: preview-slide-down 0.25s ease-in-out;
   }
   #editor {
     display: flex;
@@ -138,6 +141,7 @@ html, body {
   #preview {
     display: flex;
     flex-direction: column;
+    padding: 4vh 1em 1em 1em;
     justify-items: flex-start;
     align-items: flex-start;
     box-sizing: border-box;
