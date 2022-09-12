@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DOMPurify from 'dompurify';
 import CodeMirror from '@uiw/react-codemirror';
 import { markdown } from '@codemirror/lang-markdown';
+import { vim } from '@replit/codemirror-vim';
 import { marked } from 'marked';
 import { Icon } from '@mdi/react'
 import { mdiChevronUpCircle, mdiChevronDownCircle } from '@mdi/js';
@@ -47,7 +48,7 @@ const App = () =>{
         <div className={ showPreview ? "editor-panel-hidden" : "editor-panel"}>
           <CodeMirror
             value={defaultText}
-            extensions={[markdown()]}
+            extensions={[vim(), markdown()]}
             width="100%"
             onChange={onChange}
             id="editor"
