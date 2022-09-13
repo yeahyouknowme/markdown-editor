@@ -4,22 +4,22 @@ import CodeMirror from '@uiw/react-codemirror';
 import { markdown } from '@codemirror/lang-markdown';
 import { vim } from '@replit/codemirror-vim';
 import { marked } from 'marked';
-import { Icon } from '@mdi/react'
+import { Icon } from '@mdi/react';
 import { mdiChevronUpCircle, mdiChevronDownCircle, mdiMenu, mdiExport, mdiDotsHorizontal, mdiLanguageMarkdown, mdiFilePdfBox, mdiLan } from '@mdi/js';
 import { useAtom } from 'jotai';
 
 import './App.css';
-import { CMThemeAtom } from './store';
+import ExportMenu from './components/export-menu';
+import { CMThemeAtom, cleanMarkupAtom } from './store';
 
 marked.setOptions({
   breaks: true
 })
 
 const defaultText = "Write here"
-const defaultHTML = marked(defaultText)
 
 const App = () =>{
-  const [cleanMarkup, setCleanMarkup] = useState(DOMPurify.sanitize(defaultHTML));
+  const [cleanMarkup, setCleanMarkup] = useAtom(cleanMarkupAtom);
   const [screenSize, setScreenSize] = useState(0);
   const [showPreview, setShowPreview] = useState(false);
   const [optionsMenuOpen, setOptionsMenuOpen] = useState(false);
@@ -65,13 +65,6 @@ const App = () =>{
     setOptionsMenuOpen(false);
   }
 
-  const downloadMarkdown = () => {
-    console.log("download markdown");
-  }
-  const downloadPDF = () => {
-    console.log("download pdf");
-  }
-
   return (
     <div className="app-body">
       <div className={ showPreview ? "editor-panel-hidden" : "editor-panel" }>
@@ -86,28 +79,6 @@ const App = () =>{
                 size={ 1.1 }
                 onClick={ toggleExportMenu }
               />
-              { exportMenuOpen
-                ? <div className="export-menu">
-                    <div className="download-button">
-                      <Icon
-                        path={ mdiLanguageMarkdown }
-                        size={ 1.2 }
-                        onClick={ downloadMarkdown }
-                      />
-                      md 
-                    </div>
-                    <div className="download-button">
-                      <Icon
-                        path={ mdiFilePdfBox }
-                        size={ 1.2 }
-                        onClick={ downloadPDF }
-                      />
-                      pdf 
-                    </div>
-                    <div className="container-arrow-tr"></div>
-                  </div>
-                : null
-              }
             </div>
             <div className="editor-options-button">
               <Icon
@@ -152,6 +123,11 @@ const App = () =>{
               onClick={ togglePreview }
             />
           </div>
+      }
+      { exportMenuOpen
+        ? <ExportMenu
+          /> 
+        : null
       }
     </div>
   );

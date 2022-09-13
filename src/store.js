@@ -1,6 +1,8 @@
 import { atom } from 'jotai';
 import { tags as t } from '@lezer/highlight';
 import { createTheme } from '@uiw/codemirror-themes';
+import { marked } from 'marked'; 
+import DOMPurify from 'dompurify';
 
 const CMDefaultTheme = createTheme({
     dark: 'dark',
@@ -25,3 +27,7 @@ const CMDefaultTheme = createTheme({
 });
 
 export const CMThemeAtom = atom(CMDefaultTheme);
+
+const defaultText = "Write here"
+const defaultHTML = marked(defaultText)
+export const cleanMarkupAtom = atom(DOMPurify.sanitize(defaultHTML))
