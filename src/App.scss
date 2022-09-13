@@ -54,6 +54,21 @@ html, body {
   overflow: hidden;
 }
 
+.container-arrow-tr {
+  position: absolute;
+  background-color: $dark-gray;
+  height: 10px;
+  width: 10px;
+
+  top: 0;
+  right: 2px;
+
+  /* Border */
+  border-left: 1px solid $darker-gray;
+  border-top: 1px solid $darker-gray;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
 .default-font {
   font-family: Roboto, sans-serif, monospace;
 }
@@ -85,17 +100,73 @@ html, body {
   }
 
   .editor-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     position: absolute;
     z-index: 2;
     width: 100vw;
     height: 4vh;
     background-color: $darker-gray;
     border-bottom: 1px solid $light-gray;
-    .hamburger-button{
-      padding: 0 0 0 0.2em;
+    .editor-title {
+      display: flex;
+      align-items: center;
+      padding: 0 0 0 0.5em;
+      color: $lighter-gray;
+      font-size: x-large;
+      font-weight: bold;
+    }
+    .editor-button-group {
+      display: inline-flex;
+      .export-button {
+        display: flex;
+        align-items: center;
+        padding: 0 0 0 2px;
+        position: relative;
+        color: $lighter-gray;
+      }
+      .editor-options-button {
+        display: flex;
+        align-items: center;
+        margin: 0 1px 0 2px;
+        color: $lighter-gray;
+      }
     }
   }
-
+  .editor-options-menu {
+    position: absolute;
+    top: 4.2vh;
+    right: 0;
+    background-color: $off-white;
+    border-radius: 5px;
+    width: 65vw;
+    height: 55vh;
+  }
+  .export-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    top: 5vh;
+    right: 2px;
+    background-color: $dark-gray;
+    box-shadow: 0 0 4px 1px $darker-gray;
+    border-radius: 5px;
+    min-width: 4.4rem;
+    min-height: 20px;
+    padding: 0.3rem 0.5rem 0.4rem 0.7rem;
+    .download-button {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: $off-white;
+      font-size: small;
+      text-align: center;
+    }
+  }
   .open-preview {
     position: absolute;
     z-index: 2;
