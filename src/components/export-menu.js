@@ -1,9 +1,14 @@
 import { useState } from 'react';
+import { useAtom } from 'jotai';
 import { Icon } from '@mdi/react';
 import { mdiLanguageMarkdown, mdiFilePdfBox } from '@mdi/js';
 
+import { ThemeAtom } from '../store';
+
 const ExportMenu = () => {
-  const [exportFormat, setExportFormat] = useState('');
+  const [exportFormat, setExportFormat] = useState('md');
+
+  const [theme, setTheme] = useAtom(ThemeAtom);
 
   const formatMarkdown = () => {
     setExportFormat('md');
@@ -20,14 +25,31 @@ const ExportMenu = () => {
   }
   
   return(
-    <div className="export-menu">
-      <div className="export-menu-item">
+    <div
+      className="export-menu"
+      style={{
+        borderColor: theme.menu.borderColor,
+        backgroundColor: theme.menu.backgroundColor,
+      }}
+    >
+      <div
+        className="export-menu-item"
+        style={{
+          borderColor: theme.menu.borderColor,
+        }}
+      >
         <div 
-            className="format-button"
+          className="format-button"
           onClick={ formatMarkdown }
           style={{
-            backgroundColor: exportFormat === 'md' ? '#333347' : '#242533',
-            color: "#9898d4"
+            backgroundColor: 
+              exportFormat === 'md' 
+                ? theme.menu.activeToggleColor
+                : theme.menu.backgroundColor,
+            color: 
+              exportFormat === 'md'
+                ? theme.menu.textColor
+                : theme.menu.iconColor,
           }}
         >
           <Icon
@@ -40,9 +62,15 @@ const ExportMenu = () => {
           className="format-button"
           onClick={ formatPDF }
           style={{
-            backgroundColor: exportFormat === 'pdf' ? '#333347' : '#242533',
-            color: "#9898d4"
-          }}
+            backgroundColor: 
+              exportFormat === 'pdf' 
+                ? theme.menu.activeToggleColor
+                : theme.menu.backgroundColor,
+            color:
+              exportFormat === 'pdf'
+                ? theme.menu.textColor
+                : theme.menu.iconColor,
+            }}
         >
           <Icon
             path={ mdiFilePdfBox }
@@ -51,13 +79,18 @@ const ExportMenu = () => {
           pdf 
         </div>
       </div>
-      <div className="export-menu-item">
+      <div
+        className="export-menu-item"
+        style={{
+          borderColor: theme.menu.borderColor,
+        }}
+      >
           <button 
             className="download-button"
             onClick={ downloadFile }
             style={{
-              backgroundColor: exportFormat === '' ? '#333347' : '#6A6A94',
-              color: exportFormat === '' ? '#6A6A94' : "#242533",
+              backgroundColor: theme.menu.buttonColor,
+              color: theme.menu.buttonTextColor,
             }}
           >
             { "Download ." + exportFormat }

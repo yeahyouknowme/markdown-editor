@@ -10,7 +10,8 @@ import { useAtom } from 'jotai';
 
 import './App.css';
 import ExportMenu from './components/export-menu';
-import { CMThemeAtom, cleanMarkupAtom } from './store';
+import AppHeader from './components/app-header';
+import { CMThemeAtom, cleanMarkupAtom, ThemeAtom } from './store';
 
 marked.setOptions({
   breaks: true
@@ -22,10 +23,9 @@ const App = () =>{
   const [cleanMarkup, setCleanMarkup] = useAtom(cleanMarkupAtom);
   const [screenSize, setScreenSize] = useState(0);
   const [showPreview, setShowPreview] = useState(false);
-  const [optionsMenuOpen, setOptionsMenuOpen] = useState(false);
-  const [exportMenuOpen, setExportMenuOpen] = useState(false);
 
   const [CMTheme, setCMTheme] = useAtom(CMThemeAtom);
+  const [theme, setTheme] = useAtom(ThemeAtom);
 
   useEffect(() => {
     const handleResize = () => {
@@ -54,47 +54,10 @@ const App = () =>{
     e.preventDefault();
     console.log("toggle menu");
   }
-
-  const toggleEditorOptions = () => {
-    setOptionsMenuOpen(!optionsMenuOpen);
-    setExportMenuOpen(false);
-  }
-
-  const toggleExportMenu = () => {
-    setExportMenuOpen(!exportMenuOpen);
-    setOptionsMenuOpen(false);
-  }
-
   return (
     <div className="app-body">
       <div className={ showPreview ? "editor-panel-hidden" : "editor-panel" }>
-        <div className="editor-header">
-          <div className="editor-title">
-            markrr
-          </div>
-          <div className="editor-button-group">
-            <div className="export-button">
-              <Icon
-                path={ mdiExport }
-                size={ 1.1 }
-                onClick={ toggleExportMenu }
-              />
-            </div>
-            <div className="editor-options-button">
-              <Icon
-                path={ mdiDotsHorizontal }
-                size={ 1.4 }
-                onClick= { toggleEditorOptions }
-              />
-              { optionsMenuOpen 
-                ? <div className="editor-options-menu">
-                    
-                  </div>
-                : null
-              } 
-            </div>
-          </div>
-        </div>
+        <AppHeader />
         <CodeMirror
           value={ defaultText }
           theme={ CMTheme }
@@ -105,29 +68,27 @@ const App = () =>{
         />
       </div>
       <div className={ showPreview ? "preview-panel" : "preview-panel-hidden" }>
-          <div className="preview-header">
-            <Icon 
-              path={ mdiMenu }
-              size={ 1 }
-              onClick={ toggleMenu }
-            />
-          </div>
+          <AppHeader
+            style={{
+
+            }}
+          />
           <div id="preview" dangerouslySetInnerHTML={{__html: cleanMarkup}} />
       </div>
       { screenSize > 600 
         ? null 
-        : <div className={ showPreview ? "close-preview" : "open-preview" }>
+        : <div
+            className="preview-toggle"
+            style={{
+              color: theme.toolbar.borderColor,
+            }}
+          >
             <Icon
               path={ showPreview ? mdiChevronDownCircle : mdiChevronUpCircle }
               size={ 1.2 }
               onClick={ togglePreview }
             />
           </div>
-      }
-      { exportMenuOpen
-        ? <ExportMenu
-          /> 
-        : null
       }
     </div>
   );
