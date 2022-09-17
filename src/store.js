@@ -4,17 +4,17 @@ import { createTheme } from '@uiw/codemirror-themes';
 import { marked } from 'marked'; 
 import DOMPurify from 'dompurify';
 
-const colorPalette = {
+const colorPalette = { // TEAR IT DOWN
   red: "#A80852",
   blue: "#103C9C",
   lightPurple: "#6A6A94",
   lighterPurple: "#9898D4",
-  mediumPurple: "#7A109C",
-  purple: "#30158F",
-  darkPurple: "#1A0C4F",
-  darkerPurple: "#1E1836",
-  lighterGray: "#9898D4", // CHANGE ME
-  lightGray: "#6A6A94", // CHANGE ME
+  mediumPurple: "#58587A",
+  purple: "#3D3D54",
+  darkPurple: "#322B3B",
+  darkerPurple: "#2B2533",
+  lighterGray: "#918681", // CHANGE ME
+  lightGray: "#5C544D", // CHANGE ME
   mediumGray: "#333347",
   darkGray: "#242533",
   darkerGray: "#12121A",
@@ -35,9 +35,9 @@ const darkMode = {
     backgroundColor: colorPalette.darkGray,
     borderColor: colorPalette.mediumGray,
     textColor: colorPalette.offWhite,
-    iconColor: colorPalette.lighterGray,
+    iconColor: colorPalette.lighterPurple,
     activeToggleColor: colorPalette.mediumGray,
-    buttonColor: colorPalette.lightGray,
+    buttonColor: colorPalette.darkPurple,
     buttonTextColor: colorPalette.offWhite,
     activeButtonColor: colorPalette.lighterGray,
     boxShadowColor: colorPalette.darkGray, 
@@ -49,14 +49,14 @@ export const ThemeAtom = atom(darkMode);
 const CMDefaultTheme = createTheme({
     dark: 'dark',
     settings: {
-      background: colorPalette.offWhite,
+      background: colorPalette.darkerGray,
       foreground: colorPalette.white,
-      caret: colorPalette.lighterGray,
-      selection: colorPalette.lighterGray,
-      selectionMatch: colorPalette.lightGray,
+      caret: colorPalette.lighterPurple,
+      selection: colorPalette.lighterPurple,
+      selectionMatch: colorPalette.lightPurple,
       gutterBackground: colorPalette.mediumGray,
-      gutterForeground: colorPalette.lighterGray,
-      gutterBorder: colorPalette.lightGray,
+      gutterForeground: colorPalette.lighterPurple,
+      gutterBorder: colorPalette.lightPurple,
       lineHighlight: colorPalette.darkGray,
 
     },
