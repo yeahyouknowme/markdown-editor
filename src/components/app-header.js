@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Icon } from '@mdi/react';
 import { mdiExport, mdiDotsHorizontal } from '@mdi/js';
-import ExportMenu from "./export-menu"
+import ExportMenu from "./export-menu";
+import OptionsMenu from "./options-menu";
 
 const AppHeader = ({ style, type }) => {
   const [optionsMenuOpen, setOptionsMenuOpen] = useState(false);
@@ -43,9 +44,7 @@ const AppHeader = ({ style, type }) => {
             onClick= { toggleEditorOptions }
           />
           { optionsMenuOpen 
-            ? <div className="editor-options-menu">
-                
-              </div>
+            ? <OptionsMenu /> 
             : null
           } 
         </div>

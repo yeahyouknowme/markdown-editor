@@ -56,8 +56,8 @@ const App = () =>{
   }
   return (
     <div className="app-body">
+      <AppHeader />
       <div className={ showPreview ? "editor-panel-hidden" : "editor-panel" }>
-        <AppHeader />
         <CodeMirror
           value={ defaultText }
           theme={ CMTheme }
@@ -68,11 +68,6 @@ const App = () =>{
         />
       </div>
       <div className={ showPreview ? "preview-panel" : "preview-panel-hidden" }>
-          <AppHeader
-            style={{
-
-            }}
-          />
           <div id="preview" dangerouslySetInnerHTML={{__html: cleanMarkup}} />
       </div>
       { screenSize > 600 
@@ -80,7 +75,7 @@ const App = () =>{
         : <div
             className="preview-toggle"
             style={{
-              color: theme.toolbar.borderColor,
+              color: theme.menu.iconColor,
             }}
           >
             <Icon
