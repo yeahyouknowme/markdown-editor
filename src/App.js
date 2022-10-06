@@ -11,7 +11,15 @@ import { useAtom } from 'jotai';
 import './App.css';
 import ExportMenu from './components/export-menu';
 import AppHeader from './components/app-header';
-import { CMThemeAtom, cleanMarkupAtom, ThemeAtom } from './store';
+import { 
+  cleanMarkupAtom, 
+  ThemeAtom, 
+  vimBindingsAtom, 
+  outputFontStyleAtom, 
+  outputFontSizeAtom, 
+  editorFontSizeAtom,
+  editorThemeAtom,
+} from './store';
 
 marked.setOptions({
   breaks: true
@@ -24,8 +32,12 @@ const App = () =>{
   const [screenSize, setScreenSize] = useState(0);
   const [showPreview, setShowPreview] = useState(false);
 
-  const [CMTheme, setCMTheme] = useAtom(CMThemeAtom);
+  const [CMTheme, setCMTheme] = useAtom(editorThemeAtom);
   const [theme, setTheme] = useAtom(ThemeAtom);
+  const [outputFontStyle, ] = useAtom(outputFontStyleAtom);
+  const [outputFontSize, ] = useAtom(outputFontSizeAtom);
+  const [editorFontSize, ] = useAtom(editorFontSizeAtom);
+  const [vimBindings, ] = useAtom(vimBindingsAtom);
 
   useEffect(() => {
     const handleResize = () => {
@@ -61,14 +73,24 @@ const App = () =>{
         <CodeMirror
           value={ defaultText }
           theme={ CMTheme }
-          extensions={ [vim(), markdown()] }
+          extensions={ vimBindings ? [vim(), markdown()] : [markdown()] }
           width="100%"
           onChange={ onChange }
           id="editor"
+          style={{
+            fontSize: editorFontSize + "px",
+          }}
         />
       </div>
       <div className={ showPreview ? "preview-panel" : "preview-panel-hidden" }>
-          <div id="preview" dangerouslySetInnerHTML={{__html: cleanMarkup}} />
+          <div
+            id="preview"
+            dangerouslySetInnerHTML={{__html: cleanMarkup}}
+            style={{
+              fontFamily: outputFontStyle, 
+              fontSize: outputFontSize + "px"
+            }}
+          />
       </div>
       { screenSize > 600 
         ? null 
